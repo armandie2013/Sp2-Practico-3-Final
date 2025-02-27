@@ -15,7 +15,7 @@ export async function obtenerSuperheroePorIdController(req, res) {
     }
 }
 
-export async function obtenerSuperheroePorIdController(req, res) {
+export async function obtenerTodosLosSuperheroesController(req, res) {
     try {
         const superheroes = await obtenerTodosLosSuperheroes();
 
