@@ -9,10 +9,10 @@ app.use(express.json());
 
 connectDB();
 
-app.use('/api', superHeroRoutes);
+app.use('/api/desarrollo', superHeroRoutes);
 
 app.use((req, res) => {
-    res.status(404).send({ mensaje: "Ruta no encontrada" });
+    res.status(404).send({ mensaje: "Ruta no encontradaaaaaaaaaaaaa, fijate BIEN" });
 });
 
 app.listen(PORT, () => {
