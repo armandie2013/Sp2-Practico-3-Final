@@ -9,8 +9,8 @@ class SuperHeroRepository extends IRepository{
         return await SuperHero.find({});
     }
     async buscarPorAtributo(atributo, valor){
-        const query = {};
-        query[atributo] = valor;
+        const busquedaAtributoValor = {};
+        busquedaAtributoValor[atributo] = valor;
         return await SuperHero.find(query);
     }
     async obtenerMayoresDe30(){
