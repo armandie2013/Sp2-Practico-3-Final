@@ -12,7 +12,7 @@ connectDB();
 app.use('/api/desarrollo', superHeroRoutes);
 
 app.use((req, res) => {
-    res.status(404).send({ mensaje: "Ruta no encontradaaaaaaaaaaaaa, fijate BIEN" });
+    res.status(404).send({ mensaje: "Ruta no encontrada" });
 });
 
 app.listen(PORT, () => {
