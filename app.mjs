@@ -3,7 +3,7 @@ import { connectDB } from "./config/dbConfig.mjs";
 import superHeroRoutes from './routes/superHeroRoutes.mjs'
 
 const app = express();
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 3500;
 
 app.use(express.json());
 
