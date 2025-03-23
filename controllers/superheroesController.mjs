@@ -52,3 +52,11 @@ export async function obtenerSuperheroesMayoresDe30Controller(req, res) {
         res.status(500).send({ mensaje: 'Error al obtener superheroes mayores de 30', error: error.message });
     }
 }
+
+// // ENDPOINT SPRINT 3 TRABAJO PRACTICO 1 //
+
+export async function crearSuperheroesController(req,res){
+    try{
+        const {name}
+    }
+}
