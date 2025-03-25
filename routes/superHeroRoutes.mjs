@@ -4,6 +4,7 @@ import {
   obtenerTodosLosSuperheroesController,
   buscarSuperheroesPorAtributoController,
   obtenerSuperheroesMayoresDe30Controller,
+  crearNuevoSuperheroeController
 } from "../controllers/superheroesController.mjs";
 
 const router = express.Router();
@@ -20,6 +21,7 @@ router.get("/heroes/edad/mayores-30", obtenerSuperheroesMayoresDe30Controller);
 // ENDPOINT SPRINT 3 TRABAJO PRACTICO 1 //
 
 router.get("/heroes", obtenerTodosLosSuperheroesController);
+router.post("/heroes/crear", crearNuevoSuperheroeController);
 
 
 
