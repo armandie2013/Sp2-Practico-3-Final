@@ -3,13 +3,14 @@ import {
   obtenerTodosLosSuperheroes,
   buscarSuperheroesPorAtributo,
   obtenerSuperheroesMayoresDe30,
-  crearNuevoSuperheroe
+  crearNuevoSuperheroe,
+  actualizarSuperheroe
 } from "../services/superheroesService.mjs";
 import {
   renderizarSuperheroe,
   renderizarListaSuperheroes,
 } from "../views/responseView.mjs";
-import superHeroRepository from "../repositories/SuperHeroRepository.mjs";
+
 
 export async function obtenerSuperheroePorIdController(req, res) {
   try {
@@ -21,12 +22,10 @@ export async function obtenerSuperheroePorIdController(req, res) {
     const superheroeFormateado = renderizarSuperheroe(superheroe);
     res.status(200).json(superheroeFormateado);
   } catch (error) {
-    res
-      .status(500)
-      .send({
-        mensaje: "Error al obtener el superheroe",
-        error: error.message,
-      });
+    res.status(500).send({
+      mensaje: "Error al obtener el superheroe",
+      error: error.message,
+    });
   }
 }
 
@@ -37,12 +36,10 @@ export async function obtenerTodosLosSuperheroesController(req, res) {
     const superheroeFormateados = renderizarListaSuperheroes(superheroes);
     res.status(200).json(superheroeFormateados);
   } catch (error) {
-    res
-      .status(500)
-      .send({
-        mensaje: "Error al obtener los superheroes",
-        error: error.message,
-      });
+    res.status(500).send({
+      mensaje: "Error al obtener los superheroes",
+      error: error.message,
+    });
   }
 }
 
@@ -58,12 +55,10 @@ export async function buscarSuperheroesPorAtributoController(req, res) {
     const superheroeFormateados = renderizarListaSuperheroes(superheroes);
     res.status(200).json(superheroeFormateados);
   } catch (error) {
-    res
-      .status(500)
-      .send({
-        mensaje: "Error al buscar los superheroes",
-        error: error.message,
-      });
+    res.status(500).send({
+      mensaje: "Error al buscar los superheroes",
+      error: error.message,
+    });
   }
 }
 
@@ -78,27 +73,60 @@ export async function obtenerSuperheroesMayoresDe30Controller(req, res) {
     const superheroeFormateados = renderizarListaSuperheroes(superheroes);
     res.status(200).json(superheroeFormateados);
   } catch (error) {
-    res
-      .status(500)
-      .send({
-        mensaje: "Error al obtener superheroes mayores de 30",
-        error: error.message,
-      });
+    res.status(500).send({
+      mensaje: "Error al obtener superheroes mayores de 30",
+      error: error.message,
+    });
   }
 }
 
 // // ENDPOINT SPRINT 3 TRABAJO PRACTICO 1 //
 
-export async function crearNuevoSuperheroeController(req, res){
-    try{
-        const datos=req.body;
-        const superheroeCreado=await crearNuevoSuperheroe(datos);
-        if(!superheroeCreado){
-            return res.status(404).send({mensaje:'Superheroe no econtrado'});
-        }
-        const superheroeFormateado=renderizarSuperheroe(superheroeCreado);
-        res.status(200).json(superheroeFormateado);
-    }catch(error){
-        res.status(500).send({mensaje:'Error al crear el nuevo superheroe',error:error.message})
+export async function crearNuevoSuperheroeController(req, res) {
+  try {
+    const datos = req.body;
+    const superheroeCreado = await crearNuevoSuperheroe(datos);
+    if (!superheroeCreado) {
+      return res.status(404).send({ mensaje: "Superheroe no econtrado" });
     }
+    const superheroeFormateado = renderizarSuperheroe(superheroeCreado);
+    res.status(200).json(superheroeFormateado);
+  } catch (error) {
+    res
+      .status(500)
+      .send({
+        mensaje: "Error al crear el nuevo superheroe",
+        error: error.message,
+      });
+  }
+}
+
+export async function actualizarSuperheroeController(req, res) {
+  try {
+    const { id } = req.params;
+    const datosActualizar = req.body;
+
+    console.log(id);
+    console.log(typeof id);
+    const superheroeActualizado = await actualizarSuperheroe(
+      id,
+      datosActualizar
+    );
+
+    if (!superheroeActualizado) {
+      return res
+        .status(404)
+        .send({ mensaje: "No se contro el superheroe a actualizar" });
+    }
+
+    const superheroeFormateado = renderizarSuperheroe(superheroeActualizado);
+    res.status(200).json(superheroeFormateado);
+  } catch (error) {
+    res
+      .status(500)
+      .send({
+        mensaje: "Error al actualizar el superhéroe",
+        error: error.message,
+      });
+  }
 }

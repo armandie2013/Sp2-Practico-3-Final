@@ -4,7 +4,8 @@ import {
   obtenerTodosLosSuperheroesController,
   buscarSuperheroesPorAtributoController,
   obtenerSuperheroesMayoresDe30Controller,
-  crearNuevoSuperheroeController
+  crearNuevoSuperheroeController,
+  actualizarSuperheroeController
 } from "../controllers/superheroesController.mjs";
 
 const router = express.Router();
@@ -22,6 +23,7 @@ router.get("/heroes/edad/mayores-30", obtenerSuperheroesMayoresDe30Controller);
 
 router.get("/heroes", obtenerTodosLosSuperheroesController);
 router.post("/heroes/crear", crearNuevoSuperheroeController);
+router.put("/heroes/actualizar/:id", actualizarSuperheroeController);
 
 
 

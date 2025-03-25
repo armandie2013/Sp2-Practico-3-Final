@@ -17,7 +17,13 @@ export async function obtenerSuperheroesMayoresDe30() {
 }
 
 // SPRINT 3 TP 1 //
+//  CREAR NUEVO //
 export async function crearNuevoSuperheroe(datosNuevoSuperheroe){
     console.log("Datos recibidos para insertar:", datosNuevoSuperheroe);
     return await superHeroRepository.insertarSuperheroe(datosNuevoSuperheroe);
+}
+
+// ACTUALIZAR //
+export async function actualizarSuperheroe(id, datosActualizarSuperheroe) {
+    return await superHeroRepository.actualizarSuperheroe(id, datosActualizarSuperheroe);    
 }
