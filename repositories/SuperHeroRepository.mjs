@@ -1,3 +1,4 @@
+import superHero from "../models/SuperHero.mjs";
 import SuperHero from "../models/SuperHero.mjs";
 import IRepository from "./IRepository.mjs";
 
@@ -27,13 +28,23 @@ class SuperHeroRepository extends IRepository {
         return await SuperHero.find({ edad: { $gt: 30 } });
         */
   }
-  
+
   // SPRINT 3 TP 1 //
   // CREAR E INSERTA SUPERHEROE //
   async insertarSuperheroe(datosSuperheroe) {
     console.log("Insertando en la base de datos:", datosSuperheroe);
     const nuevoHeroe = new SuperHero(datosSuperheroe);
     return await nuevoHeroe.save();
+  }
+
+  async actualizarSuperheroe(id, datosActualizar) {
+    const heroeActualizado = await SuperHero.findByIdAndUpdate(
+      id,
+      datosActualizar,
+      { new: true }
+    );
+    console.log(heroeActualizado);
+    return heroeActualizado;
   }
 }
 
