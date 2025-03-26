@@ -1,4 +1,3 @@
-import superHero from "../models/SuperHero.mjs";
 import SuperHero from "../models/SuperHero.mjs";
 import IRepository from "./IRepository.mjs";
 
@@ -37,6 +36,7 @@ class SuperHeroRepository extends IRepository {
     return await nuevoHeroe.save();
   }
 
+  // ACTUALIZA UN SUPERHEROE //
   async actualizarSuperheroe(id, datosActualizar) {
     const heroeActualizado = await SuperHero.findByIdAndUpdate(
       id,
@@ -45,6 +45,15 @@ class SuperHeroRepository extends IRepository {
     );
     console.log(heroeActualizado);
     return heroeActualizado;
+  }
+  // ELIMINA UN SUPERHEROE POR ID //
+  async eliminarSuperheroePorId(id) {
+    const heroeEliminado = await SuperHero.findByIdAndDelete(id);
+    if (!heroeEliminado) {
+      throw new Error(`No se encontró un superhéroe con el ID: ${id}`);
+    }
+    console.log("Superhéroe eliminado:", heroeEliminado);
+    return heroeEliminado;
   }
 }
 

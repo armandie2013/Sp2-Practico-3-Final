@@ -4,13 +4,13 @@ import {
   buscarSuperheroesPorAtributo,
   obtenerSuperheroesMayoresDe30,
   crearNuevoSuperheroe,
-  actualizarSuperheroe
+  actualizarSuperheroe,
+  eliminarSuperheroePorId,
 } from "../services/superheroesService.mjs";
 import {
   renderizarSuperheroe,
   renderizarListaSuperheroes,
 } from "../views/responseView.mjs";
-
 
 export async function obtenerSuperheroePorIdController(req, res) {
   try {
@@ -82,6 +82,8 @@ export async function obtenerSuperheroesMayoresDe30Controller(req, res) {
 
 // // ENDPOINT SPRINT 3 TRABAJO PRACTICO 1 //
 
+// CREAR SUPERHEROE //
+
 export async function crearNuevoSuperheroeController(req, res) {
   try {
     const datos = req.body;
@@ -92,14 +94,14 @@ export async function crearNuevoSuperheroeController(req, res) {
     const superheroeFormateado = renderizarSuperheroe(superheroeCreado);
     res.status(200).json(superheroeFormateado);
   } catch (error) {
-    res
-      .status(500)
-      .send({
-        mensaje: "Error al crear el nuevo superheroe",
-        error: error.message,
-      });
+    res.status(500).send({
+      mensaje: "Error al crear el nuevo superheroe",
+      error: error.message,
+    });
   }
 }
+
+// ACTUALIZAR SUPERHEROE POR ID //
 
 export async function actualizarSuperheroeController(req, res) {
   try {
@@ -122,10 +124,29 @@ export async function actualizarSuperheroeController(req, res) {
     const superheroeFormateado = renderizarSuperheroe(superheroeActualizado);
     res.status(200).json(superheroeFormateado);
   } catch (error) {
+    res.status(500).send({
+      mensaje: "Error al actualizar el superhéroe",
+      error: error.message,
+    });
+  }
+}
+
+// ELIMINAR SUPERHEROE POR ID //
+
+export async function eliminarSuperheroePorIdController(req, res) {
+  try {
+    const { id } = req.params;
+    const superheroeEliminado = await eliminarSuperheroePorId(id);
+    if (!superheroeEliminado) {
+      return res.status(404).send({ mensaje: "Id de superheroe no encontrado" });
+    }
+    const superheroeFormateado = renderizarSuperheroe(superheroeEliminado);
+    res.status(200).json(superheroeFormateado);
+  } catch (error) {
     res
       .status(500)
       .send({
-        mensaje: "Error al actualizar el superhéroe",
+        mensaje: "Error al eliminar el superheroe por ID",
         error: error.message,
       });
   }
